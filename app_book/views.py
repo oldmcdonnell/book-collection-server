@@ -1,10 +1,10 @@
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, action
+from rest_framework import viewsets
 
 from .models import *
 from .serializers import *
-
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -30,3 +30,40 @@ def create_user(request):
     profile.save()
     profile_serialized = ProfileSerializer(profile)
     return Response(profile_serialized.data)
+
+
+@api_view(['GET', 'PUT'])
+@permission_classes([IsAuthenticated])
+def get_books(request):
+    books = Books.objects.all()
+    serialize_books = BookSerializer(books, many = True)
+    return Response(serialize_books.data)
+
+@api_view(['POST'])
+@permission_classes([])
+def create_book(request):
+    book = Books.objects.create(
+        title = request.data['title'],
+        author = request.data['author'],
+        genre = request.data['genre'],
+    )
+    book.save()
+    book_serializer = BookSerializer(book)
+    return Response(book_serializer.data)
+
+
+class BookViewSet(viewsets.ModelViewSet):
+    queryset = Books.objects.all()
+    serializer_class = BookSerializer
+
+@api_view(['PUT'])
+@permission_classes([])
+def update_book(request):
+    book = Books.objects.filter(id)
+    book.title = request.data['title'],
+    book.author = request.data['author'],
+    book.genre = request.data['genre']
+    book.save()
+    book_update_serializer = BookSerializer(book)
+    return Response(book_update_serializer.data)
+

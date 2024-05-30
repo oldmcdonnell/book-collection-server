@@ -10,3 +10,8 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ['id', 'first_name', 'last_name']
+
+class BookSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Books
+        fields = '__all__'
