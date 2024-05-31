@@ -40,6 +40,15 @@ def get_books(request):
         serialize_books = BookSerializer(book)
         print('hit ID 2 ', serialize_books.data)
         return Response(serialize_books.data)
+    elif request.method == 'POST':
+        book = Books.objects.create(
+            title = request.data['title'],
+            author = request.data['author'],
+            genre= request.data['genre']
+        )
+        serialize_books = BookSerializer(book)
+        print('hit ID 2 ', serialize_books.data)
+        return Response(serialize_books.data)
     elif request.method == 'GET':
         print('Request all book data', request)
         book = Books.objects.all()
