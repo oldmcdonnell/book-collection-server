@@ -35,12 +35,7 @@ def create_user(request):
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 @permission_classes([IsAuthenticated])
 def get_books(request):
-    if request.method == 'POST' and request.data['id']:
-        book = Books.objects.filter(id = request.data['id']).first()
-        serialize_books = BookSerializer(book)
-        print('hit ID 2 ', serialize_books.data)
-        return Response(serialize_books.data)
-    elif request.method == 'POST':
+    if request.method == 'POST':
         book = Books.objects.create(
             title = request.data['title'],
             author = request.data['author'],
