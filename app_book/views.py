@@ -75,6 +75,18 @@ def get_books(request):
     # return Response(serialize_books.data)
 
 
+@api_view(['PUT'])
+@permission_classes([])
+def add_book(request):
+    print('Add book', request)
+    user = request.user
+    profile = user.profile
+    bookshelf = profile.bookshelf
+    books = bookshelf.books
+    book = Books.objects.get(author= request.data['author'], title = request.data['title'])
+    books.add(book)
+
+
 @api_view(['POST'])
 @permission_classes([])
 def create_book(request):
