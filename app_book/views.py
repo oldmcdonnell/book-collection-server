@@ -114,4 +114,3 @@ def update_book(request):
     book.save()
     book_update_serializer = BookSerializer(book)
     return Response(book_update_serializer.data)
-

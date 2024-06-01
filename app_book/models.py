@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Books(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)  # Change 1 to the id of a real user in your database
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)  # Change 1 to the id of a real user in your database
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=100)
     genre = models.CharField(max_length=100, default="")
