@@ -11,7 +11,7 @@ class Books(models.Model):
         return f'{self.title} by {self.author}'
 
 class Bookshelf(models.Model):
-    profile = models.OneToOneField('Profile', on_delete=models.CASCADE, related_name='bookshelf_profile', null=True, blank=True)
+    profile = models.OneToOneField('Profile', on_delete=models.CASCADE, related_name='bookshelf_profile')
     books = models.ManyToManyField(Books)
 
     def __str__(self):
@@ -22,7 +22,7 @@ class Profile(models.Model):
     first_name = models.TextField()
     last_name = models.TextField()
     favorite_books = models.ManyToManyField(Books, blank=True)
-    bookshelf = models.OneToOneField(Bookshelf, on_delete=models.CASCADE, related_name='profile_bookshelf', null=True, blank=True)
+    bookshelf = models.OneToOneField(Bookshelf)
 
     def __str__(self):
         return f"{self.last_name}, {self.first_name}"

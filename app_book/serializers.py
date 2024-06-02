@@ -9,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['id', 'first_name', 'last_name']
+        fields = '__all__'
 
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,4 +19,9 @@ class BookSerializer(serializers.ModelSerializer):
 class BookshelfSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bookshelf
+        fields = '__all__'
+
+class BookReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BookReview
         fields = '__all__'

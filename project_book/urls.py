@@ -26,10 +26,14 @@ router.register(r'books', BookViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('profile/', get_profile),
+    path('update-book', update_book),
     path('token/', TokenObtainPairView.as_view()),
     path('refresh/', TokenRefreshView.as_view()),
     path('create-user/', create_user),
     path('get-books/', get_books),
     path('create-book', create_book),
     path('', include(router.urls)),
+    path('create-review/', create_review, name='create-review'),
+    path('book/<int:book_id>/reviews/', get_book_reviews, name='get-book-reviews'),
+    path('add-to-bookshelf/', add_to_bookshelf, name='add-to-bookshelf')
 ]
